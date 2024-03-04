@@ -5,7 +5,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/admin/include/connect.php";
 $nbPerPage = 50;
 $page = 1;
 if (isset($_GET['p']) && $_GET['p'] > 0) {
-	$page = $_GET['p'];
+    $page = $_GET['p'];
 }
 
 $sql = "SELECT COUNT(*) AS total FROM table_product";
@@ -23,7 +23,6 @@ $recordset = $stmt->fetchAll();
 
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,41 +34,40 @@ $recordset = $stmt->fetchAll();
 </head>
 
 <body>
-<table>
-    <thead>
-    <tr>
-        <th scope="col">couverture</th>
-        <th scope="col">série</th>
-        <th scope="col">title</th>
-        <th scope="col">prix</th>
-        <th scope="col">type</th>
-        <th scope="col">action</th>
-    </tr>
-    </thead>
-    <tbody>
-	<?php foreach ($recordset as $row) { ?>
-        <tr>
-            <td>
-				<?php if ($row['product_image'] != "") { ?>
-                    <img src="/upload/product/xs_<?= htmlspecialchars($row['product_image']); ?>"
-                         alt="Couverture de la BD : <?= $row['product_name']; ?>" width="150"/>
-				<?php } ?>
-            </td>
-            <td> <?= htmlspecialchars($row['product_serie']); ?> </td>
-            <td> <?= htmlspecialchars($row['product_name']); ?> </td>
-            <td> <?= htmlspecialchars($row['product_price']); ?> </td>
-            <td> <?= htmlspecialchars($row['type_name']) ?></td>
-            <td><a href="form.php?id=<?= htmlspecialchars($row['product_id']); ?>">modifier</a></td>
-            <td><a href="delete.php?id=<?= htmlspecialchars($row['product_id']); ?>">supprimer</a></td>
-        </tr>
-	<?php } ?>
-    </tbody>
-</table>
-<ul>
-	<?php for ($i = 1; $i <= ceil($total / $nbPerPage); $i++) { ?>
-        <li><a href="index.php?p=<?= $i; ?>"><?= $i; ?></a></li>
-	<?php } ?>
-</ul>
+    <table>
+        <thead>
+            <tr>
+                <th scope="col">couverture</th>
+                <th scope="col">série</th>
+                <th scope="col">title</th>
+                <th scope="col">prix</th>
+                <th scope="col">type</th>
+                <th scope="col">action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($recordset as $row) { ?>
+                <tr>
+                    <td>
+                        <?php if ($row['product_image'] != "") { ?>
+                            <img src="/upload/product/xs_<?= htmlspecialchars($row['product_image']); ?>" alt="Couverture de la BD : <?= $row['product_name']; ?>" width="150" />
+                        <?php } ?>
+                    </td>
+                    <td> <?= htmlspecialchars($row['product_serie']); ?> </td>
+                    <td> <?= htmlspecialchars($row['product_name']); ?> </td>
+                    <td> <?= htmlspecialchars($row['product_price']); ?> </td>
+                    <td> <?= htmlspecialchars($row['type_name']) ?></td>
+                    <td><a href="form.php?id=<?= htmlspecialchars($row['product_id']); ?>">modifier</a></td>
+                    <td><a href="delete.php?id=<?= htmlspecialchars($row['product_id']); ?>">supprimer</a></td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+    <ul>
+        <?php for ($i = 1; $i <= ceil($total / $nbPerPage); $i++) { ?>
+            <li><a href="index.php?p=<?= $i; ?>"><?= $i; ?></a></li>
+        <?php } ?>
+    </ul>
 </body>
 
 </html>
